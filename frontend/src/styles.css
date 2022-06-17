@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body{ height:100vh; margin:0; }
+header{ min-height:50px;  }
+footer{ min-height:50px;  }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f2d7e4;
+  display:flex;
+  flex-direction:column;
+}
+
+nav {
+  background: linear-gradient(to bottom,  #046123,  green );
+}
+
+footer{
+  margin-top: 50px;
+  bottom: 0;
+
+}
