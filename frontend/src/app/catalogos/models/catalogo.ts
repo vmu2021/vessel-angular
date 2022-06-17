@@ -1,6 +1,7 @@
 export interface Catalogo {
-    id:number | string;
+    id:string |string;
     descripcion:string;
+    // productos:any[];
     url?:string;
     _links?:string;
 }
