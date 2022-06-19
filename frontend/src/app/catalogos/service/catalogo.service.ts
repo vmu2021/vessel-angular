@@ -10,8 +10,8 @@ import { CatalogoImpl } from '../models/catalogo-impl';
 })
 export class CatalogoService {
   private host: string = environment.host;
-  // private endCatalogo: string = `${this.host}catalogos/`;
-  private endCatalogo: string = "https://vesselapi.herokuapp.com/api/catalogos";
+  private endCatalogo: string = `${this.host}catalogos/`;
+  // private endCatalogo: string = "https://vesselapi.herokuapp.com/api/catalogos";
   constructor(private http: HttpClient) { }
 
   getCatalogos():Observable<any>{
@@ -41,5 +41,16 @@ export class CatalogoService {
     return catalogos;
   }
 
+  agregarCatalogo(catalogo:Catalogo): Observable<any>{
+    return this.http.post(this.endCatalogo,catalogo);
+  }
+
+  updateCatalogo(catalogo:Catalogo,id:any):Observable<any>{
+    return this.http.put(`${this.endCatalogo}${id}`,catalogo)
+  }
+
+  deleteCatalogo(catalogo:Catalogo):Observable<any>{
+    return this.http.delete(`${this.endCatalogo}${catalogo.id}`)
+  }
 
 }

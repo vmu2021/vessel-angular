@@ -1,15 +1,56 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=ç, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>{{catalogos[0]}}</p>
-    <p>{{catalogos}}</p>
-    <pr
-</body>
-</html> -->
-<pre>{{catalogos[0].descripcion}}</pre>
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <span class="h3">CATALOGOS </span>
+  
+        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="float: right;"   > Agregar </button>-->
+        <button type="button" class="btn btn-primary"  style="float: right;"   > Agregar </button> 
+        <h5 *ngIf="catalogos.length == 0" style="color:blue; margin-top: 30px;">No hay datos para mostrar</h5>
+        <table *ngIf="catalogos.length > 0" class="table table-striped table-hover mt-5">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>DESCRIPCION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let catalogo of catalogos">
+              <td>{{catalogo.id}}</td>
+              <td>{{catalogo.descripcion}}</td>
+              <td>
+                <a type="button" ><i class="fas fa-edit fa-lg text-info" style="margin-right: 8px;"></i></a>
+                <a type="button" (click)="eliminar(catalogo)"><i class="fas fa-trash-alt fa-lg text-danger" style="margin-right: 8px"></i></a>
+              </td>
+              <!-- <td (click)="redirigirDepartamento(departamento.id)">{{ departamento.nombreDepartamento }}</td> -->
+              <td></td>
+            </tr>
+  
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar, editar o eliminar Departamentos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <h5>Para añadir, editar o eliminar un departamento, Avisar al administrador</h5>
+         <hr>
+         <h4>Vias de contacto: </h4>
+          <p><a href="#" class="tooltip-test" title="66666666">Teléfono</a> ---- <a href="#" class="tooltip-test" title="administrador@gortiz.es">correo-electronico</a></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+        </div>
+      </div>
+    </div>
+  </div> -->

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Catalogo } from '../models/catalogo';
 import { CatalogoImpl } from '../models/catalogo-impl';
 import { CatalogoService } from '../service/catalogo.service';
@@ -6,12 +7,12 @@ import { CatalogoService } from '../service/catalogo.service';
 @Component({
   selector: 'app-catalogos',
   templateUrl: './catalogos.component.html',
-  styleUrls: ['./catalogos.component.css']
+  styles: []
 })
 export class CatalogosComponent implements OnInit {
   catalogos: Catalogo[] = [];
 
-  constructor(private catalogoService: CatalogoService) { }
+  constructor(private catalogoService: CatalogoService, private router:Router) { }
 
   ngOnInit(): void {
     // this.catalogoService.getCatalogos().subscribe(response =>{
@@ -24,6 +25,7 @@ export class CatalogosComponent implements OnInit {
     this.getCatalogos();
     console.log("HOLAAAA")
     
+    
   }
   
   getCatalogos():void{
@@ -34,6 +36,16 @@ export class CatalogosComponent implements OnInit {
    err =>{
     console.log(err.error);
    });
+   
   }
+
+  eliminar(catalogo:Catalogo):void{
+    this.catalogos = this.catalogos.filter(c => catalogo !== c);
+    this.catalogoService.deleteCatalogo(catalogo).subscribe(response => {
+
+      this.router.navigate(['/catalogos'])
+
+  });
+}
   
 }

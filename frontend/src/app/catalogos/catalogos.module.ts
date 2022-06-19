@@ -5,6 +5,7 @@ import { CatalogosRoutingModule } from './catalogos-routing.module';
 import { CatalogosComponent } from './catalogos/catalogos.component';
 import { CatalogoItemComponent } from './catalogo-item/catalogo-item.component';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     CatalogosRoutingModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ]
 })
 export class CatalogosModule { }

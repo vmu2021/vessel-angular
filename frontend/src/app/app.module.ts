@@ -3,11 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { FormsModule } from '@angular/forms';
 
+export class MyModule {}
 @NgModule({
   declarations: [
     AppComponent
@@ -17,7 +18,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    FormsModule,
+    
     
   ],
   providers: [],
