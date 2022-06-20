@@ -1,3 +1,5 @@
 export const environment = {
-production:true
+production:false,
+logo: '../assets/logo.png',
+host: 'https://vesselapi.herokuapp.com/api/',
 };

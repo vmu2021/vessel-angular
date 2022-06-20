@@ -4,17 +4,13 @@ import { ShellComponent } from './shell/shell.component';
 import { HeaderComponent } from './shell/header/header.component';
 import { MainComponent } from './shell/main/main.component';
 import { FooterComponent } from './shell/footer/footer.component';
-import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { HomeComponent } from './home/home.component';
-import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from '../app-routing.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 
-@NgModule({
-})
-export class MyModule {}
+
 @NgModule({
   declarations: [
     ShellComponent,
@@ -22,22 +18,13 @@ export class MyModule {}
     MainComponent,
     FooterComponent,
     NotFoundComponent
-    
-    
-    
-
   ],
   imports: [
     CommonModule,
-    RouterModule,
-    FormsModule,
+    AppRoutingModule,
     FontAwesomeModule,
-    AppRoutingModule
-    
+    FormsModule
   ],
-  exports: [
-    ShellComponent
-    
-    ]
+  exports: [ShellComponent]
 })
 export class CoreModule { }

@@ -1,0 +1,31 @@
+<main>
+  <div class="container mt-auto">
+      <br>
+      <h3>Productos</h3>
+
+      <div *ngFor="let alimento of alimentos" id="alimentaciones">
+          <app-alimentacion-item
+              [alimento]="alimento"
+              (alimentoEliminar)="onAlimentacionEliminar($event)"
+              (alimentoEditar)="onAlimentacionEditar($event)">
+          </app-alimentacion-item>
+
+
+      </div>
+
+      <div *ngFor="let menaje of menajes" id="menajes">
+          <app-menaje-item
+              [menaje]="menaje"
+              (menajeEliminar)="onMenajeEliminar($event)"
+              (menajeEditar)="onMenajeEditar($event)">
+          </app-menaje-item>
+
+      </div>
+      <br><br>
+      <br><br>
+      <br><br>
+      <br>
+      <br>
+      <br>
+  </div>
+</main>

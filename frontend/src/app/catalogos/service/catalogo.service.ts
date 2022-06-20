@@ -1,6 +1,6 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ObservedValueOf } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Catalogo } from '../models/catalogo';
 import { CatalogoImpl } from '../models/catalogo-impl';
@@ -9,48 +9,99 @@ import { CatalogoImpl } from '../models/catalogo-impl';
   providedIn: 'root'
 })
 export class CatalogoService {
+
   private host: string = environment.host;
-  private endCatalogo: string = `${this.host}catalogos/`;
-  // private endCatalogo: string = "https://vesselapi.herokuapp.com/api/catalogos";
-  constructor(private http: HttpClient) { }
+  private urlEndPoint: string = `${this.host}catalogos`;
 
-  getCatalogos():Observable<any>{
-    return this.http.get<Catalogo[]>(this.endCatalogo);
+
+constructor(
+    private http: HttpClient,
+) { }
+
+getId(url: string):string{
+      let posicionFinal: number = url.lastIndexOf('/');
+      let numId:string = url.slice(posicionFinal + 1, url.length);
+      return numId;
+    }
+
+
+getCatalogos(): Observable<any> {
+  return this.http.get<any>(this.urlEndPoint);
   }
 
-  getCatalogo(id: string):Observable<any>{
-    return this.http.get<any>(`${this.endCatalogo}${id}/`);
-  }
+mapearCatalogo(catalogoApi: any): CatalogoImpl {
+  let catalogoMapeado: Catalogo = new CatalogoImpl();
+  catalogoMapeado.idCatalogo= this.getId(catalogoApi._links.catalogoMapeado.href);
+  catalogoMapeado.descripcion=catalogoApi.descripcion;
+  catalogoMapeado.urlCatalogo= catalogoApi._links.catalogo.href;
+  return catalogoMapeado;
+}
 
-  mapearCatalogo(catalogoApi: any):CatalogoImpl{
-    let catalogo:CatalogoImpl = new CatalogoImpl();
-    let urlCatalogo = catalogoApi._links.catalogo.href;
-    let urlProductos = catalogoApi._links.productos.href;
-    let index = urlCatalogo.lastIndexOf('/');
-    catalogo.id = urlCatalogo.substring(index+1);
-    catalogo.descripcion = catalogoApi.descripcion;
+extraerCatalogos(respuestaApi: any): Catalogo[] {
+  const catalogos: Catalogo[] = [];
+  respuestaApi._embedded.catalogos.forEach((a: any) => {
+  catalogos.push(this.mapearCatalogo(a));
+  });
+  return catalogos;
+}
 
-    return catalogo;
-  }
+crearCatalogo(catalogo: Catalogo): Observable<any>{
+  return this.http.post(`${this.urlEndPoint}`, catalogo).pipe(
+    catchError((e) =>{
+      if(e.status ===400) {
+        return throwError(()=> new Error (e));
+      }
+      if(e.roor.mensaje){
+        console.error(e.error.mensaje);
+      }
+      return throwError(()=> new Error(e));
+    })
+    );
+}
 
-  extraerCatalogos(respuestaApi: any):Catalogo[]{
-    let catalogos: Catalogo[] = [];
-    respuestaApi._embedded.catalogos.forEach((c:any) =>{      
-      catalogos.push(this.mapearCatalogo(c));
-    });
-    return catalogos;
-  }
+deleteCatalogo(id: string): Observable<Catalogo> {
+  return this.http
+    .delete<Catalogo>(`${this.urlEndPoint}/${id}`).pipe(
+    catchError((e) =>{
+      if(e.status ===400) {
+        return throwError(()=> new Error (e));
+      }
+      if(e.roor.mensaje){
+        console.error(e.error.mensaje);
+      }
+        return throwError(()=> new Error(e));
+      })
+    );
+}
 
-  agregarCatalogo(catalogo:Catalogo): Observable<any>{
-    return this.http.post(this.endCatalogo,catalogo);
-  }
 
-  updateCatalogo(catalogo:Catalogo,id:any):Observable<any>{
-    return this.http.put(`${this.endCatalogo}${id}`,catalogo)
-  }
+updateCatalogo(catalogo:Catalogo): Observable<any>{
+  return this.http.patch<any>(`${this.urlEndPoint}/${catalogo.idCatalogo}`, catalogo).pipe(
+    catchError((e) => {
+      if (e.status === 400) {
+        return throwError(() => new Error(e));
+      }
+      if (e.error.mensaje) {
+        console.error(e.error.mensaje);
+      }
+      return throwError(() => new Error(e));
+      })
+    );
+}
 
-  deleteCatalogo(catalogo:Catalogo):Observable<any>{
-    return this.http.delete(`${this.endCatalogo}${catalogo.id}`)
-  }
+getCatalogo(id:string): Observable<any>{
+  return this.http.get<any>(`${this.urlEndPoint}/${id}`).pipe(
+    catchError((e) => {
+      if (e.status === 400) {
+        return throwError(() => new Error(e));
+      }
+      if (e.error.mensaje) {
+        console.error(e.error.mensaje);
+      }
+      return throwError(() => new Error(e));
+    })
+  );
+}
+
 
 }

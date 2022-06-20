@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { faAdd, faEraser, faMagnifyingGlass, faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Catalogo } from '../models/catalogo';
-import { CatalogoService } from '../service/catalogo.service';
+import { CatalogoImpl } from '../models/catalogo-impl';
 
 @Component({
   selector: 'app-catalogo-item',
@@ -10,20 +11,42 @@ import { CatalogoService } from '../service/catalogo.service';
   styles: []
 })
 export class CatalogoItemComponent implements OnInit {
-  catalogo$?: Observable<Catalogo>;
+  catalogos: Catalogo[] = [];
+  todosAlmacenes: Catalogo[] = [];
 
-  constructor(private catalogoService:CatalogoService, private activatedRoute:ActivatedRoute) { }
+  @Input() catalogo: Catalogo = new CatalogoImpl ();
+  @Output() catalogoConsultar = new EventEmitter<CatalogoImpl>();
+  @Output() catalogoEditar = new EventEmitter<Catalogo>();
+  @Output() catalogoEliminar = new EventEmitter<CatalogoImpl>();
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.loadCatalogo();
   }
 
-  loadCatalogo():any {
-    this.catalogoService.getCatalogo(this.activatedRoute.snapshot.params['id']).subscribe(response =>{
-      console.log(response);
-    });
-    return this.catalogoService.getCatalogo(this.activatedRoute.snapshot.params['id']);
-  
+
+  eliminar(): void {
+    if (confirm('¿Está seguro? Se borrará el catalogo y todo su contenido')){
+      this.catalogoEliminar.emit(this.catalogo);
+    }
   }
+
+
+  consultar():void{
+    this.catalogoConsultar.emit(this.catalogo);
+
+  }
+
+  editar(): void{
+    this.catalogoEditar.emit(this.catalogo);
+  }
+
+
+  pencil=faPencilAlt;
+  lupa=faMagnifyingGlass;
+  trash=faTrashCan;
+  eraser= faEraser;
+  plus=faAdd;
+
 
 }

@@ -1,0 +1,40 @@
+
+<main>
+    <br><br><br><br><br><br><br><br>
+  
+  <section id="datosLavadora" *ngIf="[menaje]">
+    <div class="form-row py-2">
+      <label>Marca<sup class="text-danger">*</sup></label>
+      <input type="text" class="form-control" [(ngModel)]="menaje.descripcion" placeholder="Por ejemplo, pan"
+       name="prod"
+      required  maxlength="15"/>
+      <div class="invalid-feedback">Por favor, rellene este campo.</div>
+      <div class="valid-feedback">Ok</div>
+    </div>
+    <div class="form-row py-2">
+      <label>Precio<sup class="text-danger">*</sup></label>
+      <input type="number" class="form-control" [(ngModel)]="menaje.precio" placeholder="" name="precio" required
+        min="1" max="" #prod21="ngModel" [ngClass]="{
+      'is-invalid': prod21.invalid && (prod21.dirty || prod21.touched),
+      'is-valid': ! prod21.invalid
+    }" />
+      <div class="invalid-feedback">Por favor, rellene este campo.</div>
+      <div class="valid-feedback">Ok</div>
+    </div>
+    <div class="row justify-content-center">
+  
+      <div class="col-2">
+        <button id="guardar" type="submit" class="btn btn-primary" (click)="onEditarMenaje()"
+          routerLink="/almacenes">Guardar</button>
+      </div>
+  
+      <div class="col-2">
+        <a routerLink="/menajes"><button id="cancelar" type="button" class="btn btn-danger">Cancelar</button></a>
+      </div>
+  
+    </div>
+    <br>
+  </section>
+  <br><br><br><br><br>
+      </main>
+  
