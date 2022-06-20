@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CatalogoFormComponent } from './catalogos/catalogo-form/catalogo-form.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 
 const routes: Routes = [
@@ -11,6 +12,11 @@ const routes: Routes = [
   {
     path: 'catalogos',
     loadChildren: () => import("./catalogos/catalogos.module").then((m) => m.CatalogosModule)
+  },
+
+  {
+    path: 'formulario-catalogo',
+    component: CatalogoFormComponent
   },
 {
 path: "not-found" , 

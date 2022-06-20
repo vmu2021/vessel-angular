@@ -20,11 +20,11 @@ import { FormsModule } from '@angular/forms';
     NotFoundComponent
   ],
   imports: [
-    CommonModule,
-    AppRoutingModule,
+    CommonModule,AppRoutingModule,
     FontAwesomeModule,
-    FormsModule
-  ],
-  exports: [ShellComponent]
+    FormsModule],
+
+    exports: [ShellComponent]
 })
+
 export class CoreModule { }

@@ -1,8 +1,8 @@
 
 export const environment = {
-  production: true,
+  production: false,
   logo: '../assets/logo.png',
-  host: 'localhost:4242',
+  host: 'https://vesselapi.herokuapp.com/api/',
 
 };
 

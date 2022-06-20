@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Catalogo } from '../models/catalogo';
 import { CatalogoImpl } from '../models/catalogo-impl';
+import { CatalogoService } from '../service/catalogo.service';
 
 @Component({
   selector: 'app-catalogo-item',
@@ -13,15 +14,18 @@ import { CatalogoImpl } from '../models/catalogo-impl';
 export class CatalogoItemComponent implements OnInit {
   catalogos: Catalogo[] = [];
   todosAlmacenes: Catalogo[] = [];
-
+  catalogo$!: any;
   @Input() catalogo: Catalogo = new CatalogoImpl ();
   @Output() catalogoConsultar = new EventEmitter<CatalogoImpl>();
   @Output() catalogoEditar = new EventEmitter<Catalogo>();
   @Output() catalogoEliminar = new EventEmitter<CatalogoImpl>();
 
-  constructor() { }
+  constructor(private catalogoService:CatalogoService,private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
+  //  this.getCatalogo();
+  //  this.catalogo$ = this.getCatalogo();
+  //   console.log("HOLA")
   }
 
 
@@ -39,6 +43,12 @@ export class CatalogoItemComponent implements OnInit {
 
   editar(): void{
     this.catalogoEditar.emit(this.catalogo);
+  }
+
+  getCatalogo():any{
+    console.log(this.catalogoService.getCatalogo((this.activatedRoute.snapshot.params['id'])));
+    return this.catalogoService.getCatalogo((this.activatedRoute.snapshot.params['id']));
+
   }
 
 

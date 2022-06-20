@@ -30,17 +30,21 @@ getCatalogos(): Observable<any> {
   }
 
 mapearCatalogo(catalogoApi: any): CatalogoImpl {
-  let catalogoMapeado: Catalogo = new CatalogoImpl();
-  catalogoMapeado.idCatalogo= this.getId(catalogoApi._links.catalogoMapeado.href);
-  catalogoMapeado.descripcion=catalogoApi.descripcion;
-  catalogoMapeado.urlCatalogo= catalogoApi._links.catalogo.href;
-  return catalogoMapeado;
+  let catalogo: Catalogo = new CatalogoImpl();
+  let urlCatalogo = catalogoApi._links.catalogo.href;
+  let index = urlCatalogo.lastIndexOf('/');
+  catalogo.urlCatalogo = urlCatalogo;
+  catalogo.idCatalogo = urlCatalogo.substring(index+1);
+  catalogo.descripcion = catalogoApi.descripcion;
+  return catalogo;
+
+
 }
 
 extraerCatalogos(respuestaApi: any): Catalogo[] {
   const catalogos: Catalogo[] = [];
-  respuestaApi._embedded.catalogos.forEach((a: any) => {
-  catalogos.push(this.mapearCatalogo(a));
+  respuestaApi._embedded.catalogos.forEach((c: any) => {
+  catalogos.push(this.mapearCatalogo(c));
   });
   return catalogos;
 }

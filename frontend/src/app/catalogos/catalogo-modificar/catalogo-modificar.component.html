@@ -2,7 +2,7 @@
     <main>
         <div class="container mt-auto">
   
-            <h2>Almacen-{{catalogo.descripcion|uppercase}}</h2>
+            <h2>Catalogo-{{catalogo.descripcion|uppercase}}</h2>
   
             <div class="row justify-content-center">
                 <div class="col-8">
@@ -20,7 +20,19 @@
                 <div class="col-2">
                     <a routerLink="/"><button id="cancelar" type="button" class="btn btn-danger">Cancelar</button></a>
                 </div>
-  
+                <section id="datosCatalogo" *ngIf="[catalogo]">
+                    <div class="form-row py-2">
+                      <label>Descripcion<sup class="text-danger">*</sup></label>
+                      <input type="text" class="form-control" [(ngModel)]="catalogo.descripcion" placeholder="" name="desc"
+                      required minlength="3" maxlength="25"/>
+                      <div class="invalid-feedback">Por favor, rellene este campo.</div>
+                      <div class="valid-feedback">Ok</div>
+                      <div> <a (click)="onEditarCatalogo()"><button id="EditarCatalogo" role="button" class="btn btn-success">
+                        Editar Catalogo</button></a></div>
+                
+                    </div>
+                  </section>
+                
   
             </div>
   
