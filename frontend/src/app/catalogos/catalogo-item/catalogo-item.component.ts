@@ -5,6 +5,11 @@ import { Observable } from 'rxjs';
 import { Catalogo } from '../models/catalogo';
 import { CatalogoImpl } from '../models/catalogo-impl';
 import { CatalogoService } from '../service/catalogo.service';
+import { Producto } from '../models/producto';
+
+import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ProductoService } from 'src/app/productos/service/producto.service';
 
 @Component({
   selector: 'app-catalogo-item',
@@ -15,17 +20,22 @@ export class CatalogoItemComponent implements OnInit {
   catalogos: Catalogo[] = [];
   todosAlmacenes: Catalogo[] = [];
   catalogo$!: any;
+  catalogoCompleto!: Catalogo;
+  productosCatalogo:Producto[] = [];
   @Input() catalogo: Catalogo = new CatalogoImpl ();
   @Output() catalogoConsultar = new EventEmitter<CatalogoImpl>();
   @Output() catalogoEditar = new EventEmitter<Catalogo>();
   @Output() catalogoEliminar = new EventEmitter<CatalogoImpl>();
 
-  constructor(private catalogoService:CatalogoService,private activatedRoute:ActivatedRoute) { }
+
+  constructor(private catalogoService:CatalogoService,private activatedRoute:ActivatedRoute,private productoService:ProductoService, private http:HttpClientModule) { }
 
   ngOnInit(): void {
-  //  this.getCatalogo();
-  //  this.catalogo$ = this.getCatalogo();
-  //   console.log("HOLA")
+    // console.log(this.catalogo);
+// this.getProductosCatalogo();
+this.extraerProductos();
+
+
   }
 
 
@@ -44,12 +54,27 @@ export class CatalogoItemComponent implements OnInit {
   editar(): void{
     this.catalogoEditar.emit(this.catalogo);
   }
+  
 
   getCatalogo():any{
     console.log(this.catalogoService.getCatalogo((this.activatedRoute.snapshot.params['id'])));
     return this.catalogoService.getCatalogo((this.activatedRoute.snapshot.params['id']));
 
   }
+ 
+  
+getProductosCatalogo():Observable<any>{
+  console.log(this.catalogoService.getCatalogoProductos((this.activatedRoute.snapshot.params['id'])));
+  return this.catalogoService.getCatalogoProductos((this.activatedRoute.snapshot.params['id']));
+}
+extraerProductos():any{
+
+  this.getProductosCatalogo().subscribe(response =>{
+    this.productosCatalogo = this.productoService.extraerProductos(response);
+    console.log(this.productosCatalogo);
+  })
+  
+}
 
 
   pencil=faPencilAlt;
@@ -57,6 +82,8 @@ export class CatalogoItemComponent implements OnInit {
   trash=faTrashCan;
   eraser= faEraser;
   plus=faAdd;
+
+  
 
 
 }

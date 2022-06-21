@@ -1,9 +1,13 @@
+import { registerLocaleData } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { ProductoService } from 'src/app/productos/service/producto.service';
 import { environment } from 'src/environments/environment';
 import { Catalogo } from '../models/catalogo';
 import { CatalogoImpl } from '../models/catalogo-impl';
+import { Producto } from '../models/producto';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +19,7 @@ export class CatalogoService {
 
 
 constructor(
-    private http: HttpClient,
+    private http: HttpClient, private productoService:ProductoService
 ) { }
 
 getId(url: string):string{
@@ -36,6 +40,7 @@ mapearCatalogo(catalogoApi: any): CatalogoImpl {
   catalogo.urlCatalogo = urlCatalogo;
   catalogo.idCatalogo = urlCatalogo.substring(index+1);
   catalogo.descripcion = catalogoApi.descripcion;
+  
   return catalogo;
 
 
@@ -106,6 +111,21 @@ getCatalogo(id:string): Observable<any>{
     })
   );
 }
+getCatalogoProductos(id:string):Observable<any> {
+  return this.http.get<any>(`${this.urlEndPoint}/${id}/productos`).pipe(
+    catchError((e) => {
+      if (e.status === 400) {
+        return throwError(() => new Error(e));
+      }
+      if (e.error.mensaje) {
+        console.error(e.error.mensaje);
+      }
+      return throwError(() => new Error(e));
+    })
+  );
+}
+
+
 
 
 }

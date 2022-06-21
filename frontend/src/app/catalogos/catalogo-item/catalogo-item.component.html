@@ -3,7 +3,8 @@
     <div class="row justify-content-center">
       <div class="col-5">
         <a>
-          <li class="list-group-item" (click)="editar()">
+          <!-- <li class="list-group-item" (click)="editar()"> -->
+            <li class="list-group-item" routerLink="{{catalogo.idCatalogo}}">
             {{ catalogo.descripcion | uppercase }}
           </li>
         </a>
@@ -20,10 +21,13 @@
       </div>
       <div class="col-1">
         <a>
-          <fa-icon [icon]="eraser" class="fa-2x" (click)="eliminar()"></fa-icon>
+          <fa-icon [icon]="trash" class="fa-2x" (click)="eliminar()"></fa-icon>
         </a>
       </div>
       <div class="col-1"></div>
     </div>
+  </div>
+  <div *ngFor="let producto of productosCatalogo" id="productosCatalogo">
+    {{ producto.descripcion}}
   </div>
 </main>

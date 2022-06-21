@@ -1,1 +1,15 @@
-<p>productos works!</p>
+<div class="container mt-auto">
+  <br />
+  <h3>Productos</h3>
+
+
+
+  <div *ngFor="let producto of productos" id="cadaProducto">
+    <app-producto-item
+      [producto]="producto"
+      (productoEliminar)="onProductoEliminar($event)"
+      (productoEditar)="onProductoEditar($event)">
+    </app-producto-item>    
+    
+  </div>
+</div>

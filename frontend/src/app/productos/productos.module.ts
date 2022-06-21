@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProductosRoutingModule } from './productos-routing.module';
 import { ProductosComponent } from './productos/productos.component';
 import { ProductoItemComponent } from './producto-item/producto-item.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ProductoItemComponent } from './producto-item/producto-item.component';
   ],
   imports: [
     CommonModule,
-    ProductosRoutingModule
+    ProductosRoutingModule,
+    FontAwesomeModule
   ]
 })
 export class ProductosModule { }

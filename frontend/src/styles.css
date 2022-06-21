@@ -6,13 +6,13 @@ footer{ min-height:50px;  }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #f2d7e4;
+  background-color: #090105;
   display:flex;
   flex-direction:column;
 }
 
 nav {
-  background: linear-gradient(to bottom,  #046123,  green );
+  background: linear-gradient(to bottom,  #000000,  rgb(60, 58, 58) );
 }
 
 footer{

@@ -20,13 +20,6 @@ export class CatalogosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.catalogoService.getCatalogos().subscribe(response =>{
-    //   this.catalogos = this.catalogoService.extraerCatalogos(response);
-    //   console.log(this.catalogoService.mapearCatalogo(response._embedded.catalogos[0]));
-    //   console.log(this.catalogos)
-
-    // });
-
     this.catalogoService
       .getCatalogos().subscribe((response) =>{
       this.catalogos = this.catalogoService.extraerCatalogos(response);

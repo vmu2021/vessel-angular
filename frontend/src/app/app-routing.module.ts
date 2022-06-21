@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'formulario-catalogo',
     component: CatalogoFormComponent
   },
+  {
+    path: 'productos',
+    loadChildren: () => import("./productos/productos.module").then((m) => m.ProductosModule)
+  },
 {
 path: "not-found" , 
 component: NotFoundComponent
