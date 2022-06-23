@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenajeComponent } from './menaje.component';
+import { MenajeModificarComponent } from './menaje-modificar.component';
 
-describe('MenajeComponent', () => {
-  let component: MenajeComponent;
-  let fixture: ComponentFixture<MenajeComponent>;
+describe('MenajeModificarComponent', () => {
+  let component: MenajeModificarComponent;
+  let fixture: ComponentFixture<MenajeModificarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenajeComponent ]
+      declarations: [ MenajeModificarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MenajeComponent);
+    fixture = TestBed.createComponent(MenajeModificarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

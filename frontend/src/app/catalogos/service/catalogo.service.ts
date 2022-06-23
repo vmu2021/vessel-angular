@@ -2,11 +2,11 @@ import { registerLocaleData } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { ProductoService } from 'src/app/productos/service/producto.service';
 import { environment } from 'src/environments/environment';
 import { Catalogo } from '../models/catalogo';
 import { CatalogoImpl } from '../models/catalogo-impl';
 import { Producto } from '../models/producto';
+import { ProductoService } from './producto.service';
 
 
 @Injectable({
@@ -125,6 +125,27 @@ getCatalogoProductos(id:string):Observable<any> {
   );
 }
 
+getCatalogosBuscados(descripcion:string, refrigerado:boolean): Observable<any>{
+  return this.http.get<any>(`${this.host}alimentaciones/search/buscar-productos?descripcion=${descripcion}&refrigeado=${refrigerado}`).pipe(
+    catchError((e) => {
+      if (e.status === 400) {
+        return throwError(() => new Error(e));
+      }
+      if (e.error.mensaje) {
+        console.error(e.error.mensaje);
+      }
+      return throwError(() => new Error(e));
+    })
+  );
+}
+
+extraerCatalogosMetodo(respuestaApi: any): Catalogo[] {
+  const almacenes: Catalogo[] = [];
+  respuestaApi._embedded.catalogos.forEach((a: any) => {
+  almacenes.push(this.mapearCatalogo(a));
+  });
+  return almacenes;
+}
 
 
 

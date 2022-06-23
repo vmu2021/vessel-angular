@@ -45,13 +45,5 @@ onProductoCrear(catalogo: Catalogo){
 verDatos(catalogo: Catalogo): void {
   this.catalogo = catalogo;
 }
-  // getTodosAlmacenes(): void {
-  //   this.almacenService.getAlmacenes().subscribe(r =>{
-  //           this.todosAlmacenes.push(...this.almacenService.extraerAlmacenes(r));
-  //         });
-  // }
 
-  // modificarAlmacen(idAlmacen: string, almacen: AlmacenImpl): void{
-  //   this.almacenService.patchAlmacen(idAlmacen,almacen).subscribe();
-  // }
 }

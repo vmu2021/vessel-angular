@@ -6,11 +6,9 @@ import { Catalogo } from '../models/catalogo';
 import { CatalogoImpl } from '../models/catalogo-impl';
 import { CatalogoService } from '../service/catalogo.service';
 import { Producto } from '../models/producto';
+import { ProductoService } from 'src/app/catalogos/service/producto.service';
 
 import { HttpClientModule } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { ProductoService } from 'src/app/productos/service/producto.service';
-
 @Component({
   selector: 'app-catalogo-item',
   templateUrl: './catalogo-item.component.html',

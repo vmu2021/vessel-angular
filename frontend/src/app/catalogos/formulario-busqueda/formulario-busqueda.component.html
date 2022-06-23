@@ -1,0 +1,70 @@
+<main>
+    <div class="container mt-3-auto">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <h2>Buscar Menaje</h2>
+      <form class="was-validated">
+  
+        <div class="mb-3">
+          <label class="form-label">Descripcion:</label>
+          <input type="text" class="form-control" placeholder="p.e., platos" name="descripcion" minlength="3" maxlength="20"
+            [(ngModel)]="descripcion" required>
+        </div>
+        <div>
+          <label class="form-label">Reciclable:</label>
+          <input type="number" class="form-control" placeholder="p.e., true" name="reciclable" minlength="3" min="17"
+            [(ngModel)]="reciclable" required>
+        </div>
+      </form>
+      <div class="row" id="botones">
+        <div class="col-2">
+          <button id="buscarCatalogo" type="submit" class="btn btn-primary"
+            (click)="catalogosBuscados(descripcion,reciclable)">Buscar</button>
+        </div>
+        <div class="col-2">
+          <button id="cancelar" type="button" class="btn btn-danger" routerLink="/">Cancelar</button>
+        </div>
+      </div>
+      <div class="container-fluid almacenes-buscados">
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <h1>RESULTADO</h1>
+  
+            <div class="col-sm-12" *ngIf="catalogos.length >0 ; else elseCatalogos">
+              <div *ngFor="let catalogo of catalogos">
+                <app-catalogos-buscados [catalogo]="catalogo" ></app-catalogos-buscados>
+              </div>
+            </div>
+            <a class="btn btn-primary contenido volver" routerLink="/">Volver</a>
+            <ng-template #elseCatalogos>
+              <h4 class="card-title">
+                <b>NO HAY MENAJE</b>
+              </h4>
+            </ng-template>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br><br>
+      <br>
+      <br>
+      <br><br>
+      <br>
+      <br>
+      <br><br>
+      <br>
+  
+  
+  </main>
+  

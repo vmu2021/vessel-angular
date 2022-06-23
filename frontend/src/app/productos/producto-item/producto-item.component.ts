@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Producto } from 'src/app/catalogos/models/producto';
 import { ProductoImpl } from 'src/app/catalogos/models/producto-impl';
-import { ProductoService } from '../service/producto.service';
+import { ProductoService } from 'src/app/catalogos/service/producto.service';
 
 @Component({
   selector: 'app-producto-item',

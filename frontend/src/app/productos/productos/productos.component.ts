@@ -7,7 +7,7 @@ import { Menaje } from 'src/app/catalogos/models/menaje';
 import { MenajeImpl } from 'src/app/catalogos/models/menaje-impl';
 import { Producto } from 'src/app/catalogos/models/producto';
 import { ProductoImpl } from 'src/app/catalogos/models/producto-impl';
-import { ProductoService } from '../service/producto.service';
+import { ProductoService } from 'src/app/catalogos/service/producto.service';
 
 
 @Component({
@@ -24,16 +24,14 @@ export class ProductosComponent implements OnInit {
   productoVerDatos:Producto = new ProductoImpl();
 
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-              private router : Router,
-              private productoService: ProductoService
-  ) { }
+  constructor(private activatedRoute: ActivatedRoute,
+    private router : Router,
+    private productoService: ProductoService) { }
 
   ngOnInit(): void {
 
 
-  this.productoService.getProductos().subscribe(response =>{
+  this.productoService.getProductos().subscribe((response: any) =>{
     this.productos = this.productoService.extraerProductos(response);
       
   });

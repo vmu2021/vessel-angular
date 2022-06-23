@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faMagnifyingGlass, faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { MenajeImpl } from '../../models/menaje-impl';
+import { MenajeImpl } from 'src/app/catalogos/models/menaje-impl';
 
 @Component({
-  selector: 'app-menaje-consulta',
-  templateUrl: './menaje-consulta.component.html',
-  styleUrls: ['./menaje-consulta.component.css']
+  selector: 'app-menajes-consultar',
+  templateUrl: './menajes-consultar.component.html',
+  styleUrls: ['./menajes-consultar.component.css']
 })
-export class MenajeConsultaComponent implements OnInit {
+export class MenajesConsultarComponent implements OnInit {
 
   lupa = faMagnifyingGlass;
   fpencil = faPencil;

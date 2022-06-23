@@ -11,7 +11,7 @@ const routes: Routes = [
 
   {
     path: 'catalogos',
-    loadChildren: () => import("./catalogos/catalogos.module").then((m) => m.CatalogosModule)
+    loadChildren: () => import("./catalogos.module").then((m) => m.CatalogosModule)
   },
 
   {
